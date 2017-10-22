@@ -9,7 +9,9 @@ public class Main {
         
     		Controller c = new Controller();  
     		View v = new View();   
-        Model m = new Model();                                                                                                                                            
+        Model m = new Model();   
+        
+        // Use aggregation to put the components together
         m.registerView(v);
         c.setModel(m);
         v.setActionListener(c);

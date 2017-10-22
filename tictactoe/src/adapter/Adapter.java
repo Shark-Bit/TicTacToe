@@ -12,8 +12,7 @@ public class Adapter implements ActionListener {
     }
 
     /**
-     * This class is an ActionListener, so it must implement this method. But,
-     * it only transforms data and delegates the call.
+     * This class is an ActionListener, so it must implement this method.
      */
     public void actionPerformed(ActionEvent e) {
     		if(v.isReset(e))
@@ -24,8 +23,4 @@ public class Adapter implements ActionListener {
     		}
     }
 
-    /**
-     * Determine the name of the component from which the event came.
-     * This is not an ideal solution but good enough for now.
-     */
 }
