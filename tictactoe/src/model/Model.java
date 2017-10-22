@@ -6,7 +6,7 @@ public class Model {
 	private int movesCount;
 	private char[][] board;
 	private String message;
-	
+	//Remove playerId
 	// default constructor
 	public Model() {
 		this.board = new char[3][3];
@@ -54,13 +54,20 @@ public class Model {
 				board[x][y] = 'X';
 			else
 				board[x][y] = 'O';
-			
 			setMovesCount(--movesCount);
 			
-			if(isWinner(x, y, playerId))
+			if(isWinner(x, y, playerId)) {
 				setMessage("Player" + playerId + "is Winner!");
-			if(getMovesCount()==0)
+				v.isWinner(x, y, board[x][y], getMessage());
+			}
+			else if(getMovesCount()==0) {
 				setMessage("No Winner! Game ended in a Tie");
+				v.isWinner(x, y, board[x][y], getMessage());
+			}
+			else {
+				v.update(row, column, symbol, message);
+			}
+			
 		}
 		
 	}
@@ -93,6 +100,18 @@ public class Model {
 			return true;
 		
 		return false;
+	}
+	
+	public void ResetModel() {
+		movesCount = 9;
+		setPlayerId(1);
+		for(int i=0; i<board.length;i++) {
+			for(int j=0; j<board.length;j++) {
+				board[i][j] = '\0';
+			}
+		}
+		
+		
 	}
 		
 }
