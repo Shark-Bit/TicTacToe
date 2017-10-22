@@ -1,4 +1,5 @@
 package view;
+
 import controller.*;
 import adapter.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class View {
-	private Controller c;
+	//private Controller c;
 	private Adapter adapter;
 	private JFrame gui;
     private JButton[][] blocks;
@@ -20,14 +21,16 @@ public class View {
     		this.blocks = new JButton[3][3];
     		this.reset = new JButton("Reset");
     		this.playerturn = new JTextArea(); //fix: what is playerturn?     
-    		this.c = new Controller();
-    		this.adapter = new Adapter(c);
+    		//this.c = new Controller();
     		
     		initialize();
     }
     
+    public void setActionListener(Controller c) {
+		this.adapter = new Adapter(c);
+    }
+    
     public void initialize () {
-	    	gui.setVisible(true);
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    gui.setSize(new Dimension(500, 350));
 	    gui.setResizable(true);
@@ -55,11 +58,9 @@ public class View {
 		    }
 		}
 	    
-	    reset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                resetGame();
-            }
-        });
+	    reset.addActionListener(adapter);
+	    gui.setVisible(true);
+
     }
     
     public boolean isReset(ActionEvent e) {
@@ -68,7 +69,7 @@ public class View {
     		return false;
     }
     
-    public ArrayList<Integer> getMyPosition(ActionEvent e) {
+    public ArrayList<Integer> getPosition(ActionEvent e) {
     	ArrayList<Integer> position = new ArrayList<Integer>();
     	for(int row = 0; row<3 ;row++) {
 	        for(int column = 0; column<3 ;column++) {

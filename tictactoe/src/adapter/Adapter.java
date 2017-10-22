@@ -1,11 +1,11 @@
 package adapter;
 import controller.*;
-import javax.swing.*;
-import java.awt.*;
+import view.*;
 import java.awt.event.*;
+import java.util.*;
 public class Adapter implements ActionListener {
 	private Controller c;
-
+	private View v;
     public Adapter(Controller c) {
         this.c = c;
     }
@@ -15,19 +15,16 @@ public class Adapter implements ActionListener {
      * it only transforms data and delegates the call.
      */
     public void actionPerformed(ActionEvent e) {
-        String event = "You clicked " + getName(e);
-        log.logEvent(event);
+    		if(v.isReset(e))
+    			c.setRequest();
+    		else {
+    			ArrayList<Integer> position = v.getPosition(e);
+    			c.setRequest(position);
+    		}
     }
 
     /**
      * Determine the name of the component from which the event came.
      * This is not an ideal solution but good enough for now.
      */
-    private String getName(ActionEvent e) {
-        if (e.getSource() instanceof JComponent) {
-            return ((JComponent)e.getSource()).getName();
-        } else {
-            throw new RuntimeException("Event from unexpected component");
-        }
-    }
 }

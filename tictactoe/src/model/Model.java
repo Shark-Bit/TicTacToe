@@ -13,6 +13,10 @@ public class Model {
 		this.movesCount = 9;
 		this.playerId = 1;
 	}
+	
+	public void registerView(View v) {
+		this.v = v;
+	}
     
 	//setters and getters
 	public int getPlayerId() {
@@ -117,12 +121,13 @@ public class Model {
 	public void ResetModel() {
 		movesCount = 9;
 		setPlayerId(1);
+		setMessage("");
 		for(int i=0; i<board.length;i++) {
 			for(int j=0; j<board.length;j++) {
 				board[i][j] = '\0';
 			}
 		}
-		
+		v.resetGame();
 		
 	}
 		
