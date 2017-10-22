@@ -27,7 +27,13 @@ public class View {
     }
     
     public void setActionListener(Controller c) {
-		this.adapter = new Adapter(c);
+		this.adapter = new Adapter(c,this);
+		for(int row = 0; row<3 ;row++) {
+	        for(int column = 0; column<3 ;column++) {
+	        		blocks[row][column].addActionListener(adapter);
+	        }
+		}
+	    reset.addActionListener(adapter);
     }
     
     public void initialize () {
@@ -54,11 +60,10 @@ public class View {
 	            blocks[row][column].setPreferredSize(new Dimension(75,75));
 	            blocks[row][column].setText("");
 	            game.add(blocks[row][column]);
-	            blocks[row][column].addActionListener(adapter);
+	            
 		    }
 		}
 	    
-	    reset.addActionListener(adapter);
 	    gui.setVisible(true);
 
     }

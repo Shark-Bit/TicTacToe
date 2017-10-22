@@ -63,7 +63,7 @@ public class Model {
 			setMovesCount(--movesCount);
 			
 			if(isWinner(x, y)) {
-				setMessage("Player" + playerId + "is Winner!");
+				setMessage("Player " + playerId + " is Winner!");
 				v.isWinner(x, y, board[x][y], getMessage());
 			}
 			else if(getMovesCount()==0) {

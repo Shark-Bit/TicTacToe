@@ -6,8 +6,9 @@ import java.util.*;
 public class Adapter implements ActionListener {
 	private Controller c;
 	private View v;
-    public Adapter(Controller c) {
+    public Adapter(Controller c, View v) {
         this.c = c;
+        this.v = v;
     }
 
     /**
