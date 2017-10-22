@@ -3,6 +3,7 @@ import controller.*;
 import view.*;
 import java.awt.event.*;
 import java.util.*;
+
 public class Adapter implements ActionListener {
 	private Controller c;
 	private View v;

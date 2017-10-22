@@ -1,5 +1,7 @@
 package model;
+
 import view.*;
+
 public class Model {
 	private View v;
 	private int playerId;
