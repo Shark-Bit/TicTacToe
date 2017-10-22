@@ -11,6 +11,7 @@ public class Model {
 	public Model() {
 		this.board = new char[3][3];
 		this.movesCount = 9;
+		this.playerId = 1;
 	}
     
 	//setters and getters
@@ -47,16 +48,17 @@ public class Model {
 	}
 
 	// function to update the board
-	public void PlayMove(int x, int y, int playerId) {
+	public void PlayMove(int x, int y) {
 		if(getMovesCount() > 0){
 			
-			if(playerId%2 != 0)
+			if(playerId%2 != 0) 
 				board[x][y] = 'X';
-			else
+			else 
 				board[x][y] = 'O';
+	
 			setMovesCount(--movesCount);
 			
-			if(isWinner(x, y, playerId)) {
+			if(isWinner(x, y)) {
 				setMessage("Player" + playerId + "is Winner!");
 				v.isWinner(x, y, board[x][y], getMessage());
 			}
@@ -65,7 +67,17 @@ public class Model {
 				v.isWinner(x, y, board[x][y], getMessage());
 			}
 			else {
-				v.update(row, column, symbol, message);
+				if(playerId%2 != 0) {
+					setPlayerId(2);
+					setMessage("'O':  Player " +getPlayerId());
+				}
+				else {
+					setPlayerId(1);
+					setMessage("'X':  Player " +getPlayerId());
+
+				}
+
+				v.update(x, y, board[x][y], getMessage());
 			}
 			
 		}
@@ -73,13 +85,13 @@ public class Model {
 	}
 	
 	// function to check if there is a winner
-	public boolean isWinner(int x, int y, int playerId) {
+	public boolean isWinner(int x, int y) {
 		int countRow = 0;
 		int countCol = 0;
 		int countLDiag = 0;
 		int countRDiag = 0;
 		char symbol;
-		if(playerId %2 !=0)
+		if(getPlayerId() %2 !=0)
 			symbol = 'X';
 		else
 			symbol = 'O';

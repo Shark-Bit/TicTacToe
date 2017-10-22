@@ -81,9 +81,23 @@ public class View {
     	return position;
     }
     
-    public void update() {
-    		
+    public void update(int row, int column, char symbol, String message) {
+    		blocks[row][column].setText(Character.toString(symbol));
+    		blocks[row][column].setEnabled(false);
+    		playerturn.setText(message);
     	
+    }
+    
+    public void isWinner(int row, int column, char symbol, String message) {
+		blocks[row][column].setText(Character.toString(symbol));
+		blocks[row][column].setEnabled(false);
+		for(int i = 0; i<3 ;i++) {
+	        for(int j = 0; j<3 ;j++) {
+	        	blocks[i][j].setEnabled(false);
+	        }
+		}
+		playerturn.setText(message);
+
     }
     
     public void resetGame() {
