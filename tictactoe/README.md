@@ -6,7 +6,14 @@ TicTacToe.java is a basic Java implementation of the well-known Tic Tac Toe game
 #### View (V) - Contains the graphical user interface for interacting with the game
 #### Controller (C) - Contains the interface between View and Model
 
+### Game Flow
+
+The driver class creates instances of `Model`, `View` and `Controller` classes. The game starts with the `View` populating the graphical user interface and adding buttons for control. The `Adapter` then monitors the button for an event, and defines the `actionPerformed` for the `ActionListeners`. The `Adapter` class transfers control to the `Controller` class which notifies the `Model` that a move has been made on the (x,y) coordinate of the tic tac toe grid. The `Model` then updates its board state and accordingly updates the `View`. It also checks after every move if a winning condition has been achieved by a player or whether the game has tied and notifies the `View` with an appropriate message. The `Reset` button allows the user to clear the baord and start a new game.
+
 ### Classes and Functionality
+
+#### TicTacToe class
+This is the Driver class for the TicTacToe game. It creates objects of Model, View and Controller classes and aggregates them.
 
 #### Model Class
 The model class is where the current state of the game as well as the winning logic resides. The model class calls the view to update the gui according to the current state of the game.
@@ -28,9 +35,6 @@ public void PlayMove(int x, int y)
 public boolean isWinner(int x, int y)
 public void ResetModel()
 ```
-
-#### TicTacToe class
-This is the Driver class for the TicTacToe game. It creates objects of Model, View and Controller classes and aggregates them.
 
 #### View Class
 The View class is responsible for setting up the gui and displaying the state of the game on the gui as informed by the model.
@@ -71,7 +75,7 @@ public void setRequest(ArrayList<Integer> position)
 public void setRequest()
 ```
 
-#### Adapter Class
+#### Adapter Class implements ActionListener
 The adapter class acts as an interface between view and controller to allow decoupling. It listens for actions on the buttons and invokes the controller class to take appropriate action.
 
 Members:
