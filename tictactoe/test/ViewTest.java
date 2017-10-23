@@ -1,14 +1,9 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-//import javax.swing.text.View;
-
 import view.*;
 import controller.*;
 
-/**
- * An example test class, which merely shows how to write JUnit tests.
- */
 public class ViewTest {
     @Test
     public void testGameState() {

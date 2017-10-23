@@ -3,10 +3,6 @@ import static org.junit.Assert.*;
 import view.*;
 import model.*;
 
-
-/**
- * An example test class, which merely shows how to write JUnit tests.
- */
 public class ModelTest {
     @Test
     public void testGameState() {
