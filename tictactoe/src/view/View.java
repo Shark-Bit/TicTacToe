@@ -1,5 +1,10 @@
 package view;
 
+/** The View class is responsible for setting up the gui and 
+ * displaying the state of the game on the gui as informed by 
+ * the model.
+ */
+
 import controller.*;
 import adapter.*;
 import java.awt.*;
@@ -9,24 +14,25 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class View {
-	//private Controller c;
 	private Adapter adapter;
 	private JFrame gui;
     private JButton[][] blocks;
     private JButton reset;
     private JTextArea playerturn;
     
+    // default constructor to initialize the gui as JFrame
     public View() {
     		this.gui = new JFrame("Tic Tac Toe");
     		this.blocks = new JButton[3][3];
     		this.reset = new JButton("Reset");
-    		this.playerturn = new JTextArea(); //fix: what is playerturn?     
-    		//this.c = new Controller();
-    		
+    		this.playerturn = new JTextArea();
+    		// call the initialize method to set up the layout and initialize buttons
     		initialize();
     }
     
+    // function to add action listeners to buttons
     public void setActionListener(Controller c) {
+    		// adapter needs reference of controller and view class
 		this.adapter = new Adapter(c,this);
 		for(int row = 0; row<3 ;row++) {
 	        for(int column = 0; column<3 ;column++) {
@@ -36,6 +42,7 @@ public class View {
 	    reset.addActionListener(adapter);
     }
     
+    // function to initialize layout and buttons
     public void initialize () {
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    gui.setSize(new Dimension(500, 350));
@@ -64,16 +71,19 @@ public class View {
 		    }
 		}
 	    
+	    // make the gui visible as the final step
 	    gui.setVisible(true);
 
     }
     
+    // function to check if the action event was generated because of reset key
     public boolean isReset(ActionEvent e) {
     		if(e.getSource() == reset)
     			return true;
     		return false;
     }
     
+    // function to find the x,y-coordinates of the pressed button
     public ArrayList<Integer> getPosition(ActionEvent e) {
     	ArrayList<Integer> position = new ArrayList<Integer>();
     	for(int row = 0; row<3 ;row++) {
@@ -83,10 +93,11 @@ public class View {
 	        			position.add(column);
 	        		}
 	        }
-    	}
-    	return position;
+    		}
+    		return position;
     }
     
+    // function to update the view with the correct mark and message
     public void update(int row, int column, char symbol, String message) {
     		blocks[row][column].setText(Character.toString(symbol));
     		blocks[row][column].setEnabled(false);
@@ -94,6 +105,7 @@ public class View {
     	
     }
     
+    // function to freeze the view if there is a winner or game is tied
     public void isWinner(int row, int column, char symbol, String message) {
 		blocks[row][column].setText(Character.toString(symbol));
 		blocks[row][column].setEnabled(false);
@@ -106,6 +118,7 @@ public class View {
 
     }
     
+    // function to clear the view and reset it for a new game
     public void resetGame() {
     	for(int row = 0;row<3;row++) {
             for(int column = 0;column<3;column++) {

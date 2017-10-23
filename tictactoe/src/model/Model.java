@@ -1,5 +1,11 @@
 package model;
 
+/** The model class is where the current state of the game
+ * as well as the winning logic resides. The model class calls 
+ * the view to update the gui according to the current state of 
+ * the game.
+ * */
+
 import view.*;
 
 public class Model {
@@ -8,7 +14,7 @@ public class Model {
 	private int movesCount;
 	private char[][] board;
 	private String message;
-	//Remove playerId
+
 	// default constructor
 	public Model() {
 		this.board = new char[3][3];
@@ -16,6 +22,7 @@ public class Model {
 		this.playerId = 1;
 	}
 	
+	// initializing the reference of view class
 	public void registerView(View v) {
 		this.v = v;
 	}
@@ -53,17 +60,21 @@ public class Model {
 		this.message = message;
 	}
 
-	// function to update the board
+	// function to update the board model
 	public void PlayMove(int x, int y) {
+		
 		if(getMovesCount() > 0){
-			
+			// mark the board with x or o depending on playerId
 			if(playerId%2 != 0) 
 				board[x][y] = 'X';
 			else 
 				board[x][y] = 'O';
-	
+			
+			// reduce the count of moves left
 			setMovesCount(--movesCount);
 			
+			// check if playerId has won or if game is tied,
+			// and send message accordingly to view, also update the view
 			if(isWinner(x, y)) {
 				setMessage("Player " + playerId + " is Winner!");
 				v.isWinner(x, y, board[x][y], getMessage());
@@ -74,6 +85,7 @@ public class Model {
 			}
 			else {
 				if(playerId%2 != 0) {
+					// toggle the playerId
 					setPlayerId(2);
 					setMessage("'O':  Player " +getPlayerId());
 				}
@@ -82,7 +94,7 @@ public class Model {
 					setMessage("'X':  Player " +getPlayerId());
 
 				}
-
+				// update the board with message for next player
 				v.update(x, y, board[x][y], getMessage());
 			}
 			
@@ -120,6 +132,7 @@ public class Model {
 		return false;
 	}
 	
+	// function to clear the model and reset it to initial state
 	public void ResetModel() {
 		movesCount = 9;
 		setPlayerId(1);
