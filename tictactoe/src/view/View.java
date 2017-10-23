@@ -115,5 +115,10 @@ public class View {
         }
         playerturn.setText("Player 1 to play 'X'");
     }
+    
+    // mock getter function for checking the value of a button on the grid
+    public String getButtonText(int i, int j) {
+    		return blocks[i][j].getText();
+    }
 
 }
